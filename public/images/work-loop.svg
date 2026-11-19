@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="soft"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="softer"><feGaussianBlur stdDeviation="26"/></filter>
+  </defs>
+  <rect width="1200" height="750" fill="#101010"/>
+  <!-- concept: loop machine, motion still -->
+  <circle cx="600" cy="380" r="240" fill="none" stroke="#F1ED28" stroke-opacity="0.25" stroke-width="34" filter="url(#softer)"/>
+  <circle cx="600" cy="380" r="220" fill="none" stroke="#F1ED28" stroke-opacity="0.5" stroke-width="14" filter="url(#soft)"/>
+  <circle cx="600" cy="380" r="210" fill="none" stroke="#F1ED28" stroke-width="5"/>
+  <circle cx="600" cy="380" r="150" fill="none" stroke="#F4F4F0" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="2 10"/>
+  <!-- motion arcs -->
+  <path d="M 600 170 A 210 210 0 0 1 792 300" fill="none" stroke="#F1ED28" stroke-width="12" stroke-linecap="round" filter="url(#soft)" opacity="0.8"/>
+  <path d="M 408 300 A 210 210 0 0 1 600 170" fill="none" stroke="#F4F4F0" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <!-- core -->
+  <circle cx="600" cy="380" r="86" fill="#1a1a1a"/>
+  <circle cx="600" cy="380" r="86" fill="none" stroke="#F1ED28" stroke-opacity="0.4" stroke-width="2"/>
+  <circle cx="600" cy="380" r="14" fill="#F1ED28"/>
+  <!-- satellite dots -->
+  <circle cx="810" cy="380" r="10" fill="#F1ED28"/>
+  <circle cx="390" cy="380" r="6" fill="#F4F4F0" opacity="0.7"/>
+  <circle cx="600" cy="170" r="5" fill="#F4F4F0" opacity="0.5"/>
+</svg>

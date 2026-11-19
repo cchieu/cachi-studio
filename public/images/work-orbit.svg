@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMid slice">
+  <rect width="1200" height="750" fill="#101010"/>
+  <!-- concept: dark-mode product interface, strict hierarchy -->
+  <rect x="80" y="70" width="1040" height="610" rx="10" fill="#1a1a1a" stroke="#F4F4F0" stroke-opacity="0.08"/>
+  <rect x="80" y="70" width="1040" height="54" rx="10" fill="#101010" stroke="#F4F4F0" stroke-opacity="0.08"/>
+  <circle cx="112" cy="97" r="7" fill="#F1ED28"/>
+  <rect x="140" y="90" width="180" height="14" rx="7" fill="#F4F4F0" opacity="0.25"/>
+  <rect x="1080" y="88" width="24" height="18" rx="4" fill="#F1ED28"/>
+  <!-- sidebar -->
+  <rect x="80" y="124" width="220" height="556" fill="#101010"/>
+  <rect x="110" y="160" width="140" height="12" rx="6" fill="#F4F4F0" opacity="0.3"/>
+  <rect x="110" y="200" width="160" height="12" rx="6" fill="#F4F4F0" opacity="0.14"/>
+  <rect x="110" y="240" width="120" height="12" rx="6" fill="#F4F4F0" opacity="0.14"/>
+  <rect x="110" y="280" width="150" height="12" rx="6" fill="#F1ED28"/>
+  <rect x="110" y="320" width="130" height="12" rx="6" fill="#F4F4F0" opacity="0.14"/>
+  <!-- main panel -->
+  <rect x="330" y="160" width="480" height="300" rx="8" fill="#101010" stroke="#F4F4F0" stroke-opacity="0.08"/>
+  <rect x="360" y="190" width="180" height="16" rx="8" fill="#F4F4F0" opacity="0.35"/>
+  <polyline points="360,420 420,380 480,400 540,340 600,360 660,300 720,330 780,260" fill="none" stroke="#F1ED28" stroke-width="3"/>
+  <circle cx="780" cy="260" r="6" fill="#F1ED28"/>
+  <!-- right cards -->
+  <rect x="840" y="160" width="250" height="140" rx="8" fill="#F1ED28"/>
+  <rect x="870" y="195" width="120" height="14" rx="7" fill="#101010"/>
+  <rect x="870" y="225" width="170" height="10" rx="5" fill="#101010" opacity="0.5"/>
+  <rect x="870" y="250" width="90" height="10" rx="5" fill="#101010" opacity="0.5"/>
+  <rect x="840" y="320" width="250" height="140" rx="8" fill="#101010" stroke="#F4F4F0" stroke-opacity="0.1"/>
+  <rect x="870" y="355" width="120" height="14" rx="7" fill="#F4F4F0" opacity="0.3"/>
+  <circle cx="965" cy="425" r="30" fill="none" stroke="#F1ED28" stroke-width="4" stroke-dasharray="140 60" transform="rotate(-90 965 425)"/>
+  <!-- bottom row -->
+  <rect x="330" y="490" width="220" height="160" rx="8" fill="#101010" stroke="#F4F4F0" stroke-opacity="0.1"/>
+  <rect x="580" y="490" width="230" height="160" rx="8" fill="#101010" stroke="#F4F4F0" stroke-opacity="0.1"/>
+  <rect x="360" y="520" width="140" height="12" rx="6" fill="#F4F4F0" opacity="0.25"/>
+  <rect x="360" y="550" width="100" height="12" rx="6" fill="#F4F4F0" opacity="0.12"/>
+  <rect x="360" y="580" width="160" height="24" rx="12" fill="#F1ED28"/>
+  <rect x="610" y="520" width="150" height="12" rx="6" fill="#F4F4F0" opacity="0.25"/>
+  <g fill="#F4F4F0" opacity="0.15">
+    <rect x="610" y="556" width="170" height="8" rx="4"/>
+    <rect x="610" y="576" width="130" height="8" rx="4"/>
+    <rect x="610" y="596" width="150" height="8" rx="4"/>
+  </g>
+</svg>

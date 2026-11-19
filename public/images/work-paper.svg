@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+  <rect width="800" height="1000" fill="#F4F4F0"/>
+  <!-- concept: print system, black geometric composition -->
+  <g transform="rotate(-2 400 480)">
+    <rect x="140" y="180" width="520" height="640" fill="#FFFFFF"/>
+    <rect x="146" y="186" width="520" height="640" fill="none" stroke="#101010" stroke-opacity="0.15"/>
+    <rect x="190" y="240" width="220" height="220" fill="#101010"/>
+    <path d="M410,460 a110,110 0 0 1 110,-110 v110 z" fill="#101010"/>
+    <circle cx="300" cy="620" r="74" fill="#F1ED28"/>
+    <circle cx="300" cy="620" r="30" fill="#101010"/>
+    <rect x="410" y="240" width="200" height="10" fill="#101010"/>
+    <rect x="410" y="270" width="150" height="6" fill="#858585"/>
+    <rect x="410" y="286" width="170" height="6" fill="#858585"/>
+    <rect x="410" y="302" width="120" height="6" fill="#858585"/>
+    <rect x="410" y="540" width="200" height="6" fill="#858585"/>
+    <rect x="410" y="562" width="160" height="6" fill="#858585"/>
+    <rect x="410" y="584" width="190" height="6" fill="#858585"/>
+    <rect x="190" y="740" width="420" height="40" fill="#101010"/>
+    <rect x="190" y="700" width="140" height="10" fill="#858585"/>
+  </g>
+  <circle cx="700" cy="110" r="46" fill="#101010"/>
+  <circle cx="700" cy="110" r="46" fill="none" stroke="#F1ED28" stroke-width="3"/>
+  <rect x="80" y="90" width="60" height="6" fill="#101010" opacity="0.4"/>
+</svg>

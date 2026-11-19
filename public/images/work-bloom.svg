@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1200" height="900" fill="#101010"/>
+  <!-- concept: generative bloom, algorithmic ribbons -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M-100,700 C250,520 380,860 640,640 S1050,300 1320,430" stroke="#F1ED28" stroke-width="52" opacity="0.14"/>
+    <path d="M-100,660 C250,480 380,820 640,600 S1050,260 1320,390" stroke="#F1ED28" stroke-width="30" opacity="0.3"/>
+    <path d="M-100,620 C250,440 380,780 640,560 S1050,220 1320,350" stroke="#F1ED28" stroke-width="14" opacity="0.65"/>
+    <path d="M-100,580 C250,400 380,740 640,520 S1050,180 1320,310" stroke="#F4F4F0" stroke-width="5" opacity="0.75"/>
+    <path d="M-100,540 C250,360 380,700 640,480 S1050,140 1320,270" stroke="#F4F4F0" stroke-width="2" opacity="0.35"/>
+    <path d="M-100,760 C300,620 480,940 760,720 S1100,420 1320,520" stroke="#858585" stroke-width="2" opacity="0.5"/>
+    <path d="M-100,800 C300,660 480,980 760,760 S1100,460 1320,560" stroke="#858585" stroke-width="1.2" opacity="0.3"/>
+    <path d="M-100,220 C220,340 420,80 700,240 S1040,420 1320,240" stroke="#F1ED28" stroke-width="3" opacity="0.5"/>
+    <path d="M-100,180 C220,300 420,40 700,200 S1040,380 1320,200" stroke="#F1ED28" stroke-width="1.4" opacity="0.3"/>
+  </g>
+  <circle cx="880" cy="560" r="90" fill="#F1ED28"/>
+  <circle cx="880" cy="560" r="130" fill="none" stroke="#F1ED28" stroke-width="1.5" opacity="0.4" stroke-dasharray="2 9"/>
+  <circle cx="250" cy="300" r="5" fill="#F1ED28"/>
+  <circle cx="330" cy="250" r="3" fill="#F4F4F0" opacity="0.6"/>
+  <circle cx="1010" cy="240" r="3" fill="#F4F4F0" opacity="0.5"/>
+</svg>
