@@ -29,3 +29,4 @@ yarn-lock.debug
 
 # Binary data
 /.git/
+.vercel

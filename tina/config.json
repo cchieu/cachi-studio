@@ -1,0 +1,10 @@
+{
+  "apiVersion": "v1",
+  "studioId": "cachi-studio",
+  "studioName": "Cachi Studio",
+  "branch": "main",
+  "clientId": "{{tinaClientId}}",
+  "permissions": {
+    "only": ["username", "email"]
+  }
+}
