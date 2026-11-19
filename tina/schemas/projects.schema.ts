@@ -24,5 +24,5 @@ export const projects = schema({
     },
     { name: 'outcome', title: 'Outcome', type: 'textarea' },
   ],
-  awayFromEdit: ['deliverables'],
+  awayFromEdit: ['deliverables', 'image'],
 })
