@@ -1,0 +1,109 @@
+{
+  "version": "2.0.0",
+  "projectId": "cachi-studio",
+  "clientId": "aee415c0-c759-48b3-bd40-1e948df0b3d3",
+  "studio": {
+    "name": "Cachi Studio",
+    "url": "https://cachi-studio.vercel.app"
+  },
+  "db": {
+    "project": "cachi-studio",
+    "collections": {
+      "projects": {
+        "name": "projects",
+        "type": "document",
+        "label": "Projects",
+        "description": "Portfolio project entries",
+        "fields": [
+          "title",
+          "slug",
+          "category",
+          "year",
+          "concept",
+          "image",
+          "description",
+          "challenge",
+          "insight",
+          "solution",
+          "exploration",
+          "deliverables",
+          "outcome"
+        ],
+        "preview": {
+          "select": {
+            "title": "{{title}}",
+            "category": "{{category}}",
+            "year": "{{year}}"
+          }
+        }
+      },
+      "services": {
+        "name": "services",
+        "type": "document",
+        "label": "Services",
+        "description": "Service offerings",
+        "fields": [
+          "id",
+          "number",
+          "title",
+          "blurb",
+          "items",
+          "involves",
+          "solves",
+          "receive",
+          "deliverables"
+        ],
+        "preview": {
+          "select": {
+            "title": "{{title}}",
+            "number": "{{number}}"
+          }
+        }
+      },
+      "siteContent": {
+        "name": "siteContent",
+        "type": "document",
+        "label": "Site Content",
+        "description": "Static site content sections",
+        "fields": [
+          "heroTagline",
+          "heroSubtitle",
+          "aboutDescription",
+          "pillar1Title",
+          "pillar1Copy",
+          "pillar2Title",
+          "pillar2Copy",
+          "pillar3Title",
+          "pillar3Copy",
+          "finalCtaTitle",
+          "finalCtaSubtitle",
+          "contactEmail",
+          "contactWhatsApp",
+          "formEndpoint"
+        ],
+        "preview": {
+          "select": {
+            "heroTagline": "{{heroTagline}}",
+            "aboutDescription": "{{aboutDescription}}"
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "images": {
+      "font": {
+        "download": false,
+        "font": [
+          {
+            "name": "Google Sans",
+            "cssClass": "font-sans",
+            "weight": 400,
+            "style": "normal",
+            "url": "//fonts.googleapis.com/css2?family=Google+Sans&display=swap"
+          }
+        ]
+      }
+    }
+  }
+}
