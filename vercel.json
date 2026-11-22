@@ -1,0 +1,16 @@
+{
+  "framework": "vite",
+  "buildCommand": "tina build && vite build",
+  "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/admin/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
+}
