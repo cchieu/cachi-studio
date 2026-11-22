@@ -1,7 +1,14 @@
 {
   "framework": "vite",
-  "buildCommand": "tina build && vite build",
+  "buildCommand": "tinacms build && vite build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/admin",
+      "destination": "/admin/index.html",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/admin/(.*)",
