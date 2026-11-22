@@ -2,8 +2,9 @@
 import { defineConfig } from "tinacms";
 var config_default = defineConfig({
   branch: "master",
-  clientId: process.env.VITE_TINA_CLIENT_ID || process.env.TINA_CLIENT_ID || "",
-  token: process.env.TINA_TOKEN || "",
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || process.env.TINA_CLIENT_ID || "",
+  token: process.env.TINA_TOKEN,
+  branch: process.env.NEXT_PUBLIC_TINA_BRANCH || "master",
   studio: {
     name: "Cachi Studio",
     url: "https://cachi-studio.vercel.app"
