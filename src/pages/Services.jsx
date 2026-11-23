@@ -1,15 +1,26 @@
-import { Link } from "react-router-dom";
-import Page from "../components/Page.jsx";
-import Reveal from "../components/Reveal.jsx";
-import { services } from "../data/services.js";
-import usePageMeta from "../hooks/usePageMeta.js";
-import { trackEvent } from "../lib/analytics.js";
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import Page from '../components/Page.jsx'
+import Reveal from '../components/Reveal.jsx'
+import { getServices } from '../lib/sanity/queries'
 
 export default function Services() {
   usePageMeta(
-    "Services — CACHI | Brand, Digital, Campaigns & AI Creative Systems",
-    "Brand & identity, digital experiences, creative campaigns and AI creative systems — project-based engagements with an independent creative studio."
-  );
+    'Services — CACHI | Brand, Digital, Campaigns & AI Creative Systems',
+    'Brand & identity, digital experiences, creative campaigns and AI creative systems — project-based engagements with an independent creative studio.'
+  )
+
+  const [services, setServices] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Fetch services from Sanity
+    getServices().then((data) => {
+      setServices(data)
+    })
+    setLoading(false)
+  }, [])
 
   return (
     <Page>
@@ -45,7 +56,7 @@ export default function Services() {
           {services.map((s, i) => (
             <article
               key={s.id}
-              id={s.id}
+              id={s.number}
               className="scroll-mt-28 border-t border-white/10 py-16 md:py-20"
             >
               <div className="grid gap-10 md:grid-cols-12">
@@ -54,7 +65,7 @@ export default function Services() {
                     <p className="font-display text-6xl font-bold text-volt/90 md:text-7xl">
                       {s.number}
                     </p>
-                    <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight md:text-4xl">
+                    <h2 className="mt-4 font-display text-3xl font-bold uppercase uppercase tracking-tight md:col-span-4 md:text-4xl">
                       {s.title}
                     </h2>
                     <p className="mt-4 text-sm leading-relaxed text-paper/60">
@@ -63,7 +74,7 @@ export default function Services() {
                     <Link
                       to="/contact"
                       onClick={() =>
-                        trackEvent("service_enquiry_click", s.id)
+                        trackEvent('service_enquiry_click', s.number)
                       }
                       className="group mt-8 inline-flex items-center gap-3 rounded-full border border-volt/60 px-6 py-3 font-display text-xs font-bold tracking-[0.2em] text-volt transition hover:bg-volt hover:text-ink"
                     >
@@ -74,11 +85,7 @@ export default function Services() {
                 </div>
 
                 <div className="space-y-8 md:col-span-7 md:col-start-6">
-                  {[
-                    ["WHAT IT INVOLVES", s.involves],
-                    ["THE PROBLEMS IT SOLVES", s.solves],
-                    ["WHAT CLIENTS RECEIVE", s.receive],
-                  ].map(([label, text], j) => (
+                  {[['WHAT IT INVOLVES', s.involves], ['THE PROBLEMS IT SOLVES', s.solves], ['WHAT CLIENTS RECEIVE', s.receive]].map(([label, text], j) => (
                     <Reveal key={label} delay={j * 0.06}>
                       <div>
                         <h3 className="font-display text-xs font-bold tracking-[0.3em] text-fog">
@@ -96,7 +103,7 @@ export default function Services() {
                         EXAMPLES OF DELIVERABLES
                       </h3>
                       <ul className="mt-4 flex flex-wrap gap-2.5">
-                        {s.items.map((item) => (
+                        {s.deliverables.map((item) => (
                           <li
                             key={item}
                             className="rounded-full border border-paper/15 bg-white/[0.03] px-4 py-2 text-sm text-paper/80"
@@ -131,7 +138,7 @@ export default function Services() {
           <Reveal delay={0.14}>
             <Link
               to="/contact"
-              onClick={() => trackEvent("cta_start_a_project", "services")}
+              onClick={() => trackEvent('cta_start_a_project', 'services')}
               className="mt-9 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-paper transition hover:bg-ink/80"
             >
               START A PROJECT <span>→</span>
@@ -140,5 +147,5 @@ export default function Services() {
         </div>
       </section>
     </Page>
-  );
+  )
 }

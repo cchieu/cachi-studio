@@ -1,39 +1,37 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Page from "../components/Page.jsx";
-import Reveal from "../components/Reveal.jsx";
-import Marquee from "../components/Marquee.jsx";
-import CircleMotif from "../components/CircleMotif.jsx";
-import ProjectCard from "../components/ProjectCard.jsx";
-import { projects } from "../data/projects.js";
-import { services } from "../data/services.js";
-import { trackEvent } from "../lib/analytics.js";
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import Page from '../components/Page.jsx'
+import Reveal from '../components/Reveal.jsx'
+import Marquee from '../components/Marquee.jsx'
+import CircleMotif from '../components/CircleMotif.jsx'
+import ProjectCard from '../components/ProjectCard.jsx'
+import { getHomepage, getProjects, getServices } from '../lib/sanity/queries'
 
 /* ---------------------------------- HERO --------------------------------- */
 
-function Hero() {
-  const ref = useRef(null);
+function Hero({ homepage }) {
+  const ref = useRef(null)
   // Scroll-linked "background video" effect: the backdrop drifts, dims and
   // the content floats as the visitor scrolls through the hero.
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "24%"]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.85], [0.55, 0.15]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 140]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.15]);
+    offset: ['start start', 'end start'],
+  })
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '24%'])
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.85], [0.55, 0.15])
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 140])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.15])
 
   const lines = [
-    <>THE BRIEF</>,
-    <>
+    <span>THE BRIEF</span>,
+    <span>
       IS A <span className="text-volt">STARTING</span>
-    </>,
-    <>
+    </span>,
+    <span>
       <span className="text-outline">POINT.</span>
-    </>,
-  ];
+    </span>,
+  ]
 
   return (
     <section
@@ -47,7 +45,7 @@ function Hero() {
         <motion.div
           className="absolute -right-40 top-1/2 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-volt opacity-[0.07] blur-[120px]"
           animate={{ scale: [1, 1.12, 1] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
       </motion.div>
 
@@ -67,7 +65,7 @@ function Hero() {
           className="flex items-center gap-3 font-display text-xs font-semibold tracking-[0.35em] text-paper/60"
         >
           <span className="h-2 w-2 rounded-full bg-volt" />
-          INDEPENDENT CREATIVE STUDIO
+          {homepage.heroTagline}
         </motion.p>
 
         <h1 className="mt-8 font-display font-bold uppercase leading-[0.92] tracking-tight text-[15vw] sm:text-7xl lg:text-[7.2rem]">
@@ -75,7 +73,7 @@ function Hero() {
             <span key={i} className="block overflow-hidden pb-1">
               <motion.span
                 className="block"
-                initial={{ y: "110%" }}
+                initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, delay: 0.25 + i * 0.13, ease: [0.22, 1, 0.36, 1] }}
               >
@@ -91,9 +89,7 @@ function Hero() {
           transition={{ delay: 0.75, duration: 0.7 }}
           className="mt-8 max-w-xl text-base leading-relaxed text-paper/70 md:text-lg"
         >
-          We turn business challenges into distinctive brands, digital
-          experiences and creative campaigns through strategic thinking, design
-          and AI-assisted production.
+          {homepage.aboutDescription}
         </motion.p>
 
         <motion.div
@@ -104,15 +100,15 @@ function Hero() {
         >
           <Link
             to="/contact"
-            onClick={() => trackEvent("cta_start_a_project", "hero")}
-            className="group inline-flex items-center gap-3 rounded-full bg-volt px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-ink transition hover:bg-paper"
+            onClick={() => trackEvent('cta_start_a_project', 'hero')}
+            className="group inline-flex items-center gap-3 rounded-full bg-volt px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-ink transition:hover:bg-paper"
           >
             START A PROJECT
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
           <Link
             to="/work"
-            className="inline-flex items-center rounded-full border border-paper/25 px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-paper transition hover:border-volt hover:text-volt"
+            className="inline-flex items-center rounded-full border border-paper/25 px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-paper transition:hover:border-volt:hover:text-volt"
           >
             EXPLORE OUR WORK
           </Link>
@@ -120,7 +116,7 @@ function Hero() {
       </motion.div>
 
       {/* Scroll hint */}
-      <motion.div
+      <div
         style={{ opacity: contentOpacity }}
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
         aria-hidden="true"
@@ -128,13 +124,13 @@ function Hero() {
         <p className="text-center font-display text-[10px] tracking-[0.4em] text-paper/50">
           SCROLL
         </p>
-        <motion.div
+        <div
           className="mx-auto mt-2 h-10 w-px origin-top bg-paper/40"
           animate={undefined}
         />
-      </motion.div>
+      </div>
     </section>
-  );
+  )
 }
 
 /* --------------------------- BRAND INTRODUCTION -------------------------- */
@@ -189,12 +185,12 @@ function Intro() {
         <circle cx="100" cy="100" r="46" fill="#F1ED28" />
       </svg>
     </section>
-  );
+  )
 }
 
 /* ------------------------------ SELECTED WORK ----------------------------- */
 
-function SelectedWork() {
+function SelectedWork({ projects }) {
   return (
     <section className="bg-ink">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
@@ -230,27 +226,25 @@ function SelectedWork() {
 
         <div className="mt-16 grid gap-x-6 gap-y-14 md:grid-cols-2">
           {projects.slice(0, 4).map((project, i) => (
-            <Reveal key={project.slug} delay={(i % 2) * 0.1} className={i % 2 === 1 ? "md:mt-20" : ""}>
+            <Reveal key={project.slug} delay={(i % 2) * 0.1} className={i % 2 === 1 ? 'md:mt-20' : ''}>
               <ProjectCard project={project} />
             </Reveal>
           ))}
         </div>
 
-        <Reveal>
-          <p className="mt-16 border-t border-white/10 pt-6 text-xs tracking-wide text-fog">
-            All projects shown are clearly-labelled concept work created for
-            demonstration — replaced with authentic client projects as the
-            studio grows.
-          </p>
-        </Reveal>
+        <p className="mt-16 border-t border-white/10 pt-6 text-xs tracking-wide text-fog">
+          All projects shown are clearly-labelled concept work created for
+          demonstration — replaced with authentic client projects as the
+          studio grows.
+        </p>
       </div>
     </section>
-  );
+  )
 }
 
 /* -------------------------------- SERVICES -------------------------------- */
 
-function ServicesSection() {
+function ServicesSection({ services }) {
   return (
     <section className="bg-paper text-ink">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
@@ -269,8 +263,8 @@ function ServicesSection() {
           {services.map((s, i) => (
             <Reveal key={s.id} delay={i * 0.05}>
               <Link
-                to={`/services#${s.id}`}
-                className="group grid items-baseline gap-4 border-t border-ink/15 px-4 py-10 transition-colors duration-300 hover:bg-ink hover:text-paper md:grid-cols-12 md:gap-6"
+                to={`/services#${s.number}`}
+                className="group grid items-baseline gap-4 border-t border-ink/15 px-4 py-10 transition-colors duration-300 hover:bg-ink:hover:text-paper md:grid-cols-12 md:gap-6"
               >
                 <span className="font-display text-sm font-semibold text-ink/40 transition-colors group-hover:text-volt md:col-span-1">
                   {s.number}
@@ -294,18 +288,18 @@ function ServicesSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 /* ----------------------------- THE APPROACH ------------------------------ */
 
 const STEPS = [
-  ["01", "UNDERSTAND", "We identify the real problem, the audience and the intended outcome."],
-  ["02", "REFRAME", "We challenge assumptions and look for opportunities beyond the initial brief."],
-  ["03", "EXPLORE", "We generate ideas, explore different directions and test creative possibilities."],
-  ["04", "MAKE", "We turn the strongest ideas into considered design and creative experiences."],
-  ["05", "REFINE", "We improve, optimise and prepare the final work for delivery."],
-];
+  ['01', 'UNDERSTAND', 'We identify the real problem, the audience and the intended outcome.'],
+  ['02', 'REFRAME', 'We challenge assumptions and look for opportunities beyond the initial brief.'],
+  ['03', 'EXPLORE', 'We generate ideas, explore different directions and test creative possibilities.'],
+  ['04', 'MAKE', 'We turn the strongest ideas into considered design and creative experiences.'],
+  ['05', 'REFINE', 'We improve, optimise and prepare the final work for delivery.'],
+]
 
 function Approach() {
   return (
@@ -333,21 +327,17 @@ function Approach() {
                 <p className="mt-3 text-sm leading-relaxed text-paper/55">{copy}</p>
               </div>
             </Reveal>
-          ))}
+          ))
+          }
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 /* -------------------------------- WHY CACHI ------------------------------- */
 
 function WhyCachi() {
-  const pillars = [
-    ["HUMAN THINKING", "Technology supports the process. Creative intelligence drives the decisions."],
-    ["INTELLIGENT MAKING", "We bring the right tools and methods into every project."],
-    ["PURPOSEFUL DESIGN", "Every creative decision should serve a clear objective."],
-  ];
   return (
     <section className="bg-paper text-ink">
       <div className="mx-auto grid max-w-7xl gap-16 px-6 py-24 md:grid-cols-2 md:py-32">
@@ -378,7 +368,7 @@ function WhyCachi() {
         </div>
 
         <div>
-          {pillars.map(([title, copy], i) => (
+          {STEPS.map(([title, copy], i) => (
             <Reveal key={title} delay={i * 0.08}>
               <div className="border-t border-ink/15 py-8">
                 <h3 className="font-display text-2xl font-bold tracking-tight">
@@ -393,25 +383,25 @@ function WhyCachi() {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 /* ------------------------------ FINAL CTA -------------------------------- */
 
 function FinalCTA() {
-  const ref = useRef(null);
+  const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
-  });
-  const scale = useTransform(scrollYProgress, [0, 1], [0.35, 1.55]);
+    offset: ['start end', 'end start'],
+  })
+  const scale = useTransform(scrollYProgress, [0, 1], [0.35, 1.55])
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-ink" data-cursor>
       {/* Giant electric circle, scaling with scroll */}
       <motion.div
         aria-hidden="true"
-        style={{ x: "-50%", y: "-50%", scale }}
+        style={{ x: '-50%', y: '-50%', scale }}
         className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] rounded-full bg-volt"
       />
 
@@ -433,16 +423,15 @@ function FinalCTA() {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               to="/contact"
-              onClick={() => trackEvent("cta_start_a_project", "final_cta")}
-              className="inline-flex items-center gap-3 rounded-full bg-volt px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-ink transition hover:bg-paper"
+              onClick={() => trackEvent('cta_start_a_project', 'final_cta')}
+              className="inline-flex items-center gap-3 rounded-full bg-volt px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-ink transition:hover:bg-paper"
             >
               START A PROJECT <span>→</span>
             </Link>
-            {/* PLACEHOLDER: replace with the studio's real email address */}
             <a
               href="mailto:hello@cachi.studio"
-              onClick={() => trackEvent("email_click", "final_cta")}
-              className="inline-flex items-center rounded-full border border-paper/30 px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-paper transition hover:border-volt hover:text-volt"
+              onClick={() => trackEvent('email_click', 'final_cta')}
+              className="inline-flex items-center rounded-full border border-paper/30 px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-paper transition:hover:border-volt:hover:text-volt"
             >
               TALK TO CACHI
             </a>
@@ -450,25 +439,57 @@ function FinalCTA() {
         </Reveal>
       </div>
     </section>
-  );
+  )
 }
 
 /* --------------------------------- PAGE ---------------------------------- */
 
 export default function Home() {
+  const [homepage, setHomepage] = useState(null)
+  const [projects, setProjects] = useState([])
+  const [services, setServices] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Fetch homepage data
+    getHomepage().then((data) => {
+      setHomepage(data)
+    })
+
+    // Fetch projects
+    getProjects().then((data) => {
+      setProjects(data)
+    })
+
+    // Fetch services
+    getServices().then((data) => {
+      setServices(data)
+    })
+
+    setLoading(false)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    )
+  }
+
   return (
     <Page>
-      <Hero />
+      <Hero homepage={homepage} />
       <Marquee
-        items={["BEYOND THE BRIEF", "BETTER QUESTIONS", "BOLDER DESIGN"]}
+        items={['BEYOND THE BRIEF', 'BETTER QUESTIONS', 'BOLDER DESIGN']}
         className="border-y border-ink/10 bg-volt text-ink"
       />
       <Intro />
-      <SelectedWork />
-      <ServicesSection />
+      <SelectedWork projects={projects} />
+      <ServicesSection services={services} />
       <Approach />
       <WhyCachi />
       <FinalCTA />
     </Page>
-  );
+  )
 }

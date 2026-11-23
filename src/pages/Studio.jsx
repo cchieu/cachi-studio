@@ -1,43 +1,46 @@
-import { Link } from "react-router-dom";
-import Page from "../components/Page.jsx";
-import Reveal from "../components/Reveal.jsx";
-import CircleMotif from "../components/CircleMotif.jsx";
-import usePageMeta from "../hooks/usePageMeta.js";
-import { trackEvent } from "../lib/analytics.js";
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import Page from '../components/Page.jsx'
+import Reveal from '../components/Reveal.jsx'
+import CircleMotif from '../components/CircleMotif.jsx'
+import { getHomepage, getSiteSettings } from '../lib/sanity/queries'
+import { Homepage, SiteSettings } from '../lib/sanity/types'
+import usePageMeta from '../hooks/usePageMeta.js'
 
 const SECTIONS = [
-  [
-    "THE CACHI PHILOSOPHY",
-    "Cachi is derived from two names — Caleb and Chieu. The name represents the combination of two creative identities into one independent creative practice, built around a shared belief in the power of ideas.",
-    "We see design as a tool for solving problems, creating opportunities and changing how businesses communicate with their audiences. The brief is a starting point, never a limitation.",
-  ],
-  [
-    "CREATIVE THINKING & PROBLEM-SOLVING",
-    "Every project starts with questions, not deliverables. What is really being asked for? What is really needed? Where are the assumptions hiding?",
-    "This curiosity-first approach means we often arrive at solutions the original brief never described — and that's the point.",
-  ],
-  [
-    "HUMAN CREATIVITY & ARTIFICIAL INTELLIGENCE",
-    "AI is an important part of how the studio works — accelerating production, opening new visual territories and making rapid iteration possible.",
-    "But the direction is always human. Strategy, taste and judgement stay with people; the technology explores, we decide.",
-  ],
-  [
-    "HOW WE COLLABORATE",
-    "We work closely and transparently with founders, marketing teams and in-house designers — as an extension of your team rather than a vendor behind a wall.",
-    "Expect honest opinions, open questions and work-in-progress shared early. The best outcomes come from clients who want a thinking partner, not just an executor.",
-  ],
-  [
-    "ACROSS INDUSTRIES & MARKETS",
-    "Independent by design, we work with ambitious businesses of any size, in any industry and any market — from first-time founders to established teams looking for a new point of view.",
-    "Different contexts sharpen our thinking. The studio's ambition is to keep learning from every sector it touches.",
-  ],
-];
+  ['HUMAN THINKING', 'Technology supports the process. Creative intelligence drives the decisions.'],
+  ['INTELLIGENT MAKING', 'We bring the right tools and methods into every project.'],
+  ['PURPOSEFUL DESIGN', 'Every creative decision should serve a clear objective.'],
+]
 
 export default function Studio() {
+  const [homepage, setHomepage] = useState(null)
+  const [siteSettings, setSiteSettings] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Fetch homepage data for pillars and CTA
+    getHomepage().then((data) => {
+      setHomepage(data)
+    })
+
+    // Fetch site settings
+    getSiteSettings().then((data) => {
+      setSiteSettings(data)
+    })
+
+    setLoading(false)
+  }, [])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   usePageMeta(
-    "Studio — CACHI | An Independent Creative Studio",
-    "The story behind Cachi — an independent creative studio built around curiosity, experimentation and a different way of approaching problems."
-  );
+    'Studio — CACHI | An Independent Creative Studio',
+    'The story behind Cachi — an independent creative studio built around curiosity, experimentation and a different way of approaching problems.'
+  )
 
   return (
     <Page>
@@ -87,7 +90,7 @@ export default function Studio() {
             <article
               key={title}
               className={`grid gap-8 border-t border-white/10 py-14 md:grid-cols-12 md:py-16 ${
-                i % 2 === 1 ? "bg-white/[0.015]" : ""
+                i % 2 === 1 ? 'bg-white/[0.015]' : ''
               }`}
             >
               <Reveal className="md:col-span-4">
@@ -122,7 +125,7 @@ export default function Studio() {
           <Reveal delay={0.1}>
             <Link
               to="/contact"
-              onClick={() => trackEvent("cta_start_a_project", "studio")}
+              onClick={() => trackEvent('cta_start_a_project', 'studio')}
               className="mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 font-display text-sm font-bold tracking-[0.15em] text-paper transition hover:bg-ink/80"
             >
               START A PROJECT <span>→</span>
@@ -131,5 +134,5 @@ export default function Studio() {
         </div>
       </section>
     </Page>
-  );
+  )
 }

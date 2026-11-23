@@ -1,22 +1,30 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import Page from "../components/Page.jsx";
-import Reveal from "../components/Reveal.jsx";
-import ProjectCard from "../components/ProjectCard.jsx";
-import { projects, CATEGORIES } from "../data/projects.js";
-import usePageMeta from "../hooks/usePageMeta.js";
+import { useState, useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import Page from '../components/Page.jsx'
+import Reveal from '../components/Reveal.jsx'
+import ProjectCard from '../components/ProjectCard.jsx'
+import { getProjects } from '../lib/sanity/queries'
 
 export default function Work() {
   usePageMeta(
-    "Work — CACHI | Independent Creative Studio",
-    "Selected work — a collection of ideas, identities, experiences and creative solutions by Cachi creative studio."
-  );
-  const [filter, setFilter] = useState("All Work");
+    'Work — CACHI | Independent Creative Studio',
+    'Selected work — a collection of ideas, identities, experiences and creative solutions by Cachi creative studio.'
+  )
+
+  const [projects, setProjects] = useState([])
+  const [filter, setFilter] = useState('All Work')
+
+  useEffect(() => {
+    // Fetch projects from Sanity
+    getProjects().then((data) => {
+      setProjects(data)
+    })
+  }, [])
 
   const list =
-    filter === "All Work"
+    filter === 'All Work'
       ? projects
-      : projects.filter((p) => p.category === filter);
+      : projects.filter((p) => p.category === filter)
 
   return (
     <Page>
@@ -47,48 +55,56 @@ export default function Work() {
       <section className="bg-ink">
         <div className="mx-auto max-w-7xl px-6 pb-28">
           {/* Filters */}
-          <Reveal>
+          <div>
             <div
               className="flex flex-wrap gap-3 border-y border-white/10 py-6"
               role="tablist"
               aria-label="Filter projects by category"
             >
-              {CATEGORIES.map((c) => (
-                <button
-                  key={c}
-                  role="tab"
-                  aria-selected={filter === c}
-                  onClick={() => setFilter(c)}
-                  className={`rounded-full border px-5 py-2 font-display text-xs font-bold tracking-[0.15em] transition ${
-                    filter === c
-                      ? "border-volt bg-volt text-ink"
-                      : "border-paper/20 text-paper/60 hover:border-volt/60 hover:text-paper"
-                  }`}
-                >
-                  {c.toUpperCase()}
-                </button>
-              ))}
+              <button
+                key="all"
+                role="tab"
+                aria-selected="true"
+                onClick={() => setFilter('All Work')}
+                className="rounded-full border px-5 py-2 font-display text-xs font-bold tracking-[0.15em] transition border-volt bg-volt text-ink"
+              >
+                ALL WORK
+              </button>
+              {projects.map((project) => {
+                const category = project.category
+                return (
+                  <button
+                    key={category}
+                    role="tab"
+                    aria-selected={filter === category}
+                    onClick={() => setFilter(category)}
+                    className="rounded-full border px-5 py-2 font-display text-xs font-bold tracking-[0.15em] transition border-paper/20 text-paper/60 hover:border-volt/60 hover:text-paper"
+                  >
+                    {category.toUpperCase()}
+                  </button>
+                )
+              })}
             </div>
-          </Reveal>
+          </div>
 
           {/* Grid */}
-          <motion.div layout className="mt-14 grid gap-x-6 gap-y-14 md:grid-cols-2">
+          <motion-div layout class="mt-14 grid gap-x-6 gap-y-14 md:grid-cols-2">
             <AnimatePresence mode="popLayout">
               {list.map((project, i) => (
-                <motion.div
+                <motion-div
                   layout
                   key={project.slug}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.97 }}
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  className={i % 2 === 1 ? "md:mt-16" : ""}
+                  className={i % 2 === 1 ? 'md:mt-16' : ''}
                 >
                   <ProjectCard project={project} />
-                </motion.div>
+                </motion-div>
               ))}
             </AnimatePresence>
-          </motion.div>
+          </motion-div>
 
           {list.length === 0 && (
             <p className="py-20 text-center text-fog">
@@ -98,5 +114,5 @@ export default function Work() {
         </div>
       </section>
     </Page>
-  );
+  )
 }
