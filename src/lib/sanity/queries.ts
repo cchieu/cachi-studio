@@ -1,6 +1,8 @@
 // GROQ queries for fetching content from Sanity
 // These queries are type-safe and use the interfaces defined in types.ts
 
+import { sanityClient } from './client'
+
 import type {
   Homepage,
   Projects,
@@ -9,7 +11,7 @@ import type {
   TeamMember,
   Navigation,
   SiteSettings,
-} from '../lib/sanity/types'
+} from './types'
 
 // ============================================================
 // Homepage Queries
