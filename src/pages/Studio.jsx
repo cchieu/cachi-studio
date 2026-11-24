@@ -5,7 +5,6 @@ import Page from '../components/Page.jsx'
 import Reveal from '../components/Reveal.jsx'
 import CircleMotif from '../components/CircleMotif.jsx'
 import { getHomepage, getSiteSettings } from '../lib/sanity/queries'
-import { Homepage, SiteSettings } from '../lib/sanity/types'
 import usePageMeta from '../hooks/usePageMeta.js'
 
 const SECTIONS = [
@@ -19,23 +18,35 @@ export default function Studio() {
   const [siteSettings, setSiteSettings] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    // Fetch homepage data for pillars and CTA
-    getHomepage().then((data) => {
-      setHomepage(data)
-    })
+ useEffect(() => {
+  let isMounted = true
 
-    // Fetch site settings
-    getSiteSettings().then((data) => {
-      setSiteSettings(data)
-    })
+  async function loadContent() {
+    try {
+      const [homepageData, settingsData] = await Promise.all([
+        getHomepage(),
+        getSiteSettings(),
+      ])
 
-    setLoading(false)
-  }, [])
-
-  if (loading) {
-    return <div>Loading...</div>
+      if (isMounted) {
+        setHomepage(homepageData)
+        setSiteSettings(settingsData)
+      }
+    } catch (error) {
+      console.error('Failed to load Studio content:', error)
+    } finally {
+      if (isMounted) {
+        setLoading(false)
+      }
+    }
   }
+
+  loadContent()
+
+  return () => {
+    isMounted = false
+  }
+}, [])
 
   usePageMeta(
     'Studio — CACHI | An Independent Creative Studio',

@@ -1,23 +1,5 @@
 {
   "framework": "vite",
-  "buildCommand": "tinacms build && vite build",
-  "outputDirectory": "dist",
-  "redirects": [
-    {
-      "source": "/admin",
-      "destination": "/admin/index.html",
-      "permanent": true
-    }
-  ],
-  "headers": [
-    {
-      "source": "/admin/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }

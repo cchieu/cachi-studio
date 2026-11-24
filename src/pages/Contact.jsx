@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import Page from '../components/Page.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { getSiteSettings } from '../lib/sanity/queries'
-import { SiteSettings } from '../lib/sanity/types'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { trackEvent } from '../lib/analytics.js'
 
