@@ -477,6 +477,24 @@ export default function Home() {
     )
   }
 
+  if (!homepage) {
+    return (
+      <Page>
+        <section className="flex min-h-screen items-center justify-center bg-ink px-6 text-paper">
+          <div className="max-w-xl text-center">
+            <h1 className="font-display text-3xl font-bold uppercase">
+              Homepage content unavailable
+            </h1>
+            <p className="mt-4 text-paper/60">
+              The homepage content could not be loaded. Please check the
+              Sanity connection and ensure a published homepage document exists.
+            </p>
+          </div>
+        </section>
+      </Page>
+    )
+  }
+
   return (
     <Page>
       <Hero homepage={homepage} />
